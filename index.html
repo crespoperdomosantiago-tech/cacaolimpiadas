@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cacaolimpiadas 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --cream:#F6EEDD; --paper:#FFFDF8; --ink:#2B1E12; --ink-soft:#5B4A38;
+    --brown:#6B3E1F; --brown-deep:#4A2A14; --gold:#C79A2E; --gold-soft:#E4C567;
+    --green:#2F4B33; --red:#A63A2C; --line:#DCC9A3;
+    --shadow: 0 10px 30px -12px rgba(74,42,20,0.35);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --cream:#1D1712; --paper:#231B15; --ink:#F2E7D3; --ink-soft:#C9B79C;
+      --brown:#D79A5C; --brown-deep:#F0C98B; --gold:#E4C567; --gold-soft:#F3DE9C;
+      --green:#7FAE86; --red:#E08669; --line:#3B2E20;
+      --shadow: 0 10px 30px -12px rgba(0,0,0,0.6);
+    }
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:var(--cream);}
+  body{color:var(--ink);font-family:'IBM Plex Sans',system-ui,sans-serif;padding:0 16px;}
+  .wrap{max-width:860px;margin:0 auto;}
+  h1,h2,h3{font-family:'Anton',system-ui,sans-serif;letter-spacing:.02em;}
+  .mono{font-family:'IBM Plex Mono',monospace;font-variant-numeric:tabular-nums;}
+
+  .hero{padding:48px 0 32px;text-align:center;}
+  .logo-img{width:150px;height:150px;object-fit:contain;margin:0 auto 16px;filter:drop-shadow(0 8px 18px rgba(74,42,20,.35));}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;text-transform:uppercase;letter-spacing:.18em;font-size:12px;color:var(--brown);font-weight:600;}
+  .hero h1{font-size:clamp(2.4rem,8vw,4.4rem);color:var(--brown-deep);margin:10px 0 6px;line-height:.95;}
+  .hero p.tag{color:var(--ink-soft);font-size:1.05rem;max-width:520px;margin:0 auto;}
+  .hero-meta{margin-top:26px;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;}
+  .pill{font-family:'IBM Plex Mono',monospace;font-size:12px;padding:7px 14px;border-radius:999px;background:var(--paper);border:1px solid var(--line);color:var(--ink-soft);}
+  .pill b{color:var(--brown);}
+
+  section{padding:34px 0;border-top:1px solid var(--line);}
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:20px;flex-wrap:wrap;}
+  .section-head h2{font-size:clamp(1.5rem,4vw,2rem);color:var(--brown-deep);}
+  .section-num{font-family:'IBM Plex Mono',monospace;color:var(--gold);font-size:13px;font-weight:600;}
+
+  .rules{background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:8px 22px;}
+  .rule{display:grid;grid-template-columns:34px 1fr;gap:14px;padding:16px 0;border-bottom:1px dashed var(--line);}
+  .rule:last-child{border-bottom:none;}
+  .rule .n{font-family:'Anton',sans-serif;color:var(--gold);font-size:1.3rem;line-height:1.4;}
+  .rule p{margin:0;line-height:1.55;}
+  .rule b{color:var(--brown-deep);}
+
+  .athletes{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;}
+  .athlete{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:16px 14px;text-align:center;}
+  .athlete .avatar{width:44px;height:44px;border-radius:50%;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-family:'Anton',sans-serif;font-size:16px;color:var(--paper);}
+  .athlete .name{font-weight:600;font-size:.92rem;}
+  .athlete .role{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);margin-top:2px;}
+
+  .board-wrap{overflow-x:auto;border-radius:14px;box-shadow:var(--shadow);}
+  table{width:100%;border-collapse:collapse;background:var(--paper);border:1px solid var(--line);min-width:560px;}
+  thead th{text-align:left;font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-soft);padding:14px 16px;border-bottom:1px solid var(--line);white-space:nowrap;}
+  tbody td{padding:12px 16px;border-bottom:1px solid var(--line);font-size:.95rem;vertical-align:middle;}
+  tbody tr:last-child td{border-bottom:none;}
+  .medal{font-size:1.2rem;}
+  .pts{font-family:'IBM Plex Mono',monospace;font-weight:700;color:var(--brown);font-size:1.05rem;}
+  .tag-last{display:inline-block;margin-left:8px;font-family:'IBM Plex Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--red);border:1px solid var(--red);border-radius:999px;padding:2px 8px;white-space:nowrap;}
+  .row-actions{display:flex;align-items:center;gap:6px;flex-wrap:nowrap;}
+  .qty{width:44px;font-family:'IBM Plex Mono',monospace;font-size:.85rem;text-align:center;border:1px solid var(--line);border-radius:8px;padding:6px 2px;background:var(--cream);color:var(--ink);}
+  .btn-add,.btn-sub{font-family:'IBM Plex Sans',sans-serif;font-weight:600;font-size:.82rem;border-radius:8px;border:1px solid transparent;padding:7px 10px;cursor:pointer;white-space:nowrap;}
+  .btn-add{background:var(--green);color:var(--paper);}
+  .btn-add:disabled{opacity:.6;cursor:default;}
+  .btn-sub{background:transparent;border-color:var(--line);color:var(--ink-soft);}
+  .status-note{margin-top:14px;font-size:.85rem;color:var(--ink-soft);font-style:italic;}
+  .board-foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;align-items:center;}
+
+  .timeline{position:relative;padding-left:24px;border-left:2px solid var(--line);}
+  .tl-item{position:relative;padding-bottom:20px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{content:'';position:absolute;left:-29px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--gold);border:2px solid var(--paper);box-shadow:0 0 0 2px var(--gold);}
+  .tl-time{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--brown);font-weight:600;}
+  .tl-item p{margin:4px 0 0;line-height:1.5;}
+
+  .quotes{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;}
+  .quote{background:var(--paper);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:10px;padding:16px;}
+  .quote p{margin:0 0 8px;font-size:.98rem;line-height:1.5;}
+  .quote .by{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.05em;}
+
+  footer{padding:30px 0 40px;text-align:center;color:var(--ink-soft);font-size:.85rem;}
+  footer .coc{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-top:6px;}
+  @media (max-width:520px){ .rules{padding:4px 14px;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="hero">
+    <img class="logo-img" src="/logo.webp" alt="Escudo oficial de las Cacaolimpiadas 2026" />
+    <div class="eyebrow">Comité Olímpico Cacaolímpico · COC</div>
+    <h1>CACAOLIMPIADAS 2026</h1>
+    <p class="tag">El torneo de honor que nadie pidió: gana quien acumule más idas válidas al baño. Talento natural, cero trampas, gloria eterna.</p>
+    <div class="hero-meta">
+      <span class="pill">Sede: <b>Cacolimpiadas</b> (grupo de WhatsApp)</span>
+      <span class="pill">Inicio oficial: <b>hoy, 6:00 PM</b></span>
+      <span class="pill">Fundador: <b>Adri leal</b></span>
+    </div>
+  </div>
+
+  <section>
+    <div class="section-head"><h2>Reglamento oficial</h2><span class="section-num">12 artículos</span></div>
+    <div class="rules">
+      <div class="rule"><div class="n">1</div><p><b>Objetivo:</b> gana quien acumule más idas válidas al baño a hacer #2 durante el período de competencia.</p></div>
+      <div class="rule"><div class="n">2</div><p><b>Sistema de puntos:</b> cada #2 completado = 1 punto. No importa cantidad ni duración.</p></div>
+      <div class="rule"><div class="n">3</div><p><b>Regla de honestidad:</b> funciona por honor. Mentir sobre una ida = descalificación inmediata por fraude deportivo.</p></div>
+      <div class="rule"><div class="n">4</div><p><b>Registro:</b> cada participante debe anunciar en el chat cuando sume un punto, por ejemplo: "💩 +1 oficial".</p></div>
+      <div class="rule"><div class="n">5</div><p><b>No vale intento fallido:</b> sentarse y que no pase nada = 0 puntos.</p></div>
+      <div class="rule"><div class="n">6</div><p><b>Nada de forzarlo:</b> no vale usar laxantes, medicamentos ni hacer cosas que puedan hacerles daño solo para sumar puntos.</p></div>
+      <div class="rule"><div class="n">7</div><p><b>Doble visita:</b> si alguien va dos veces en momentos distintos, cuentan como dos. Dividir una sola ida no cuenta como dos.</p></div>
+      <div class="rule"><div class="n">8</div><p><b>VAR 🚽:</b> cualquier punto sospechoso puede ser impugnado por los demás. No se permiten fotos ni pruebas; con el registro basta.</p></div>
+      <div class="rule"><div class="n">9</div><p><b>Tabla general:</b> 🥇 primer lugar = Cacaolímpico de Oro, 🥈 segundo = Intestino de Plata, 🥉 tercero = Bronce Digestivo.</p></div>
+      <div class="rule"><div class="n">10</div><p><b>Último lugar:</b> recibe oficialmente el título de "Estreñido de la Temporada".</p></div>
+      <div class="rule"><div class="n">11</div><p><b>Empate:</b> gana quien haya alcanzado primero esa cantidad. Nada de desempates forzados.</p></div>
+      <div class="rule"><div class="n">12</div><p><b>Regla suprema:</b> cualquier discusión absurda será resuelta por votación del COC.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Atletas inscritos</h2><span class="section-num">7 competidores</span></div>
+    <div class="athletes" id="athletes-grid"></div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Tabla de posiciones</h2><span class="section-num" id="db-status">Conectando…</span></div>
+    <p class="status-note" style="margin-top:0;margin-bottom:14px;">Cada quien registra su propia caca del día: elige la cantidad y presiona "Registrar 💩". La tabla sube y baja sola para todos, en vivo. El botón "−1" es para correcciones o impugnaciones VAR (art. 8).</p>
+    <div class="board-wrap">
+      <table>
+        <thead><tr><th>Pos.</th><th>Atleta</th><th>Puntos</th><th>Medalla</th><th>Registrar</th></tr></thead>
+        <tbody id="board-body"></tbody>
+      </table>
+    </div>
+    <div class="board-foot"><p class="status-note" id="board-note">Todos empatados en 0 — la competencia arranca hoy a las 6:00 PM.</p></div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Registro en vivo</h2><span class="section-num">Últimas idas</span></div>
+    <div class="timeline" id="feed"></div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Cronología del día</h2><span class="section-num">21 sep 2026</span></div>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-time">2:44 PM</div><p><b>Adri leal</b> funda el grupo y publica el Reglamento Oficial de las Cacaolimpiadas 2026.</p></div>
+      <div class="tl-item"><div class="tl-time">2:45 PM</div><p>Cubo pide ser admin "por si pierdo en playys y me enojo" — Adri leal accede entre risas.</p></div>
+      <div class="tl-item"><div class="tl-time">2:57 PM</div><p><b>Adri leal</b> anuncia: "Empezamos hoy a las 6. Así les da tiempo de generar caca."</p></div>
+      <div class="tl-item"><div class="tl-time">3:00 – 3:07 PM</div><p>Primeras bromas previas al inicio entre los atletas. Aún sin puntos oficiales.</p></div>
+      <div class="tl-item"><div class="tl-time">4:41 – 4:48 PM</div><p>Cadena de mensajes "¿Cuándo empezamos?" circula entre todos mientras se acerca la hora oficial.</p></div>
+      <div class="tl-item"><div class="tl-time">6:00 PM</div><p><b>Arranque oficial</b> de la competencia.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head"><h2>Frases destacadas</h2><span class="section-num">Highlights</span></div>
+    <div class="quotes">
+      <div class="quote"><p>"Empezamos hoy a las 6. Así les da tiempo de generar caca."</p><div class="by">Adri leal</div></div>
+      <div class="quote"><p>"Puedo ser admin? Por si pierdo en playys y me enojo sabes."</p><div class="by">Cubo</div></div>
+      <div class="quote"><p>"Literalmente acabo de cagar."</p><div class="by">Atleta anónimo</div></div>
+      <div class="quote"><p>"Yo ni cago."</p><div class="by">Ander</div></div>
+    </div>
+  </section>
+
+  <footer>
+    Sitio no oficial generado a partir del chat "Cacolimpiadas" de WhatsApp.
+    <div class="coc">Que gane el mejor intestino</div>
+  </footer>
+
+</div>
+
+<script>
+(function(){
+  var ATHLETES = [
+    {id:'adrileal', name:'Adri leal', color:'var(--brown)', initials:'AL', role:'Fundador · COC'},
+    {id:'cubo', name:'Cubo', color:'var(--gold)', initials:'C', role:'Atleta'},
+    {id:'juanes', name:'Juanes', color:'var(--green)', initials:'J', role:'Atleta'},
+    {id:'juanjo', name:'Juanjo', color:'var(--red)', initials:'JJ', role:'Atleta'},
+    {id:'martin', name:'Martin Cordero', color:'var(--brown-deep)', initials:'MC', role:'Atleta'},
+    {id:'marujas', name:'Marujas Dihrcc', color:'var(--gold-soft)', initials:'MD', role:'Atleta'},
+    {id:'ander', name:'Ander', color:'var(--ink-soft)', initials:'A', role:'Atleta'}
+  ];
+
+  var state = { points:{}, events:[] };
+  ATHLETES.forEach(function(a){ state.points[a.id]=0; });
+  var busy = false;
+
+  function renderAthleteGrid(){
+    document.getElementById('athletes-grid').innerHTML = ATHLETES.map(function(a){
+      return '<div class="athlete"><div class="avatar" style="background:'+a.color+'">'+a.initials+'</div>' +
+        '<div class="name">'+a.name+'</div><div class="role">'+a.role+'</div></div>';
+    }).join('');
+  }
+
+  function relTime(iso){
+    var s = Math.floor((Date.now()-new Date(iso).getTime())/1000);
+    if (s<5) return 'justo ahora';
+    if (s<60) return 'hace '+s+' s';
+    var m = Math.floor(s/60);
+    if (m<60) return 'hace '+m+' min';
+    var h = Math.floor(m/60);
+    if (h<24) return 'hace '+h+' h';
+    return 'hace '+Math.floor(h/24)+' d';
+  }
+
+  function escapeHtml(str){
+    return String(str).replace(/[&<>"']/g, function(c){
+      return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+    });
+  }
+
+  function renderBoard(){
+    var rows = ATHLETES.map(function(a){ return {id:a.id, name:a.name, pts: state.points[a.id]||0}; })
+      .sort(function(a,b){ return b.pts - a.pts || a.name.localeCompare(b.name); });
+
+    var tbody = document.getElementById('board-body');
+    var prevRects = {};
+    Array.prototype.forEach.call(tbody.children, function(tr){ prevRects[tr.getAttribute('data-id')] = tr.getBoundingClientRect(); });
+
+    var maxPts = rows[0] ? rows[0].pts : 0;
+    var minPts = rows[rows.length-1] ? rows[rows.length-1].pts : 0;
+
+    tbody.innerHTML = rows.map(function(r,i){
+      var medal = (i===0 && r.pts>0) ? '🥇' : (i===1 && r.pts>0) ? '🥈' : (i===2 && r.pts>0) ? '🥉' : '—';
+      var isLast = (i===rows.length-1) && r.pts===minPts && maxPts>minPts;
+      var lastTag = isLast ? '<span class="tag-last">Estreñido de la temporada</span>' : '';
+      return '<tr data-id="'+r.id+'">' +
+        '<td class="mono">'+(i+1)+'</td>' +
+        '<td>'+escapeHtml(r.name)+lastTag+'</td>' +
+        '<td class="pts">'+r.pts+'</td>' +
+        '<td class="medal">'+medal+'</td>' +
+        '<td><div class="row-actions">' +
+          '<input class="qty" type="number" min="1" max="10" value="1" data-qty="'+r.id+'" aria-label="Cantidad para '+escapeHtml(r.name)+'">' +
+          '<button class="btn-add" data-add="'+r.id+'">Registrar 💩</button>' +
+          '<button class="btn-sub" data-sub="'+r.id+'" title="Corrección / VAR">−1</button>' +
+        '</div></td>' +
+      '</tr>';
+    }).join('');
+
+    Array.prototype.forEach.call(tbody.children, function(tr){
+      var id = tr.getAttribute('data-id');
+      var prev = prevRects[id];
+      if(!prev) return;
+      var next = tr.getBoundingClientRect();
+      var dy = prev.top - next.top;
+      if (dy){
+        tr.style.transition = 'none';
+        tr.style.transform = 'translateY('+dy+'px)';
+        requestAnimationFrame(function(){
+          tr.style.transition = 'transform .35s ease';
+          tr.style.transform = '';
+        });
+      }
+    });
+
+    Array.prototype.forEach.call(tbody.querySelectorAll('[data-add]'), function(b){
+      b.addEventListener('click', function(){
+        var id = b.getAttribute('data-add');
+        var input = tbody.querySelector('[data-qty="'+id+'"]');
+        var n = Math.max(1, Math.min(10, parseInt(input.value,10) || 1));
+        logPoint(id, n);
+      });
+    });
+    Array.prototype.forEach.call(tbody.querySelectorAll('[data-sub]'), function(b){
+      b.addEventListener('click', function(){ logPoint(b.getAttribute('data-sub'), -1); });
+    });
+
+    var note = document.getElementById('board-note');
+    if (maxPts===0){
+      note.textContent = 'Todos empatados en 0 — la competencia arranca hoy a las 6:00 PM.';
+    } else {
+      var leader = rows[0];
+      note.textContent = leader.name + ' va al frente con ' + leader.pts + (leader.pts===1?' punto.':' puntos.');
+    }
+  }
+
+  function renderFeed(){
+    var el = document.getElementById('feed');
+    if(!state.events.length){
+      el.innerHTML = '<p class="status-note">Aún no hay registros. ¡Sé el primero en anunciar tu punto!</p>';
+      return;
+    }
+    var items = state.events.slice(-15).slice().reverse();
+    el.innerHTML = items.map(function(e){
+      var a = ATHLETES.filter(function(x){ return x.id===e.athleteId; })[0];
+      var name = a ? a.name : e.athleteId;
+      var isNeg = e.delta < 0;
+      var label = isNeg ? '🚫 corrección (−1)' : ('💩 +'+e.delta+' oficial');
+      var verb = isNeg ? 'corrigió un punto' : 'registró';
+      return '<div class="tl-item"><div class="tl-time">'+relTime(e.ts)+'</div>' +
+        '<p><b>'+escapeHtml(name)+'</b> '+verb+' — <span class="mono">'+label+'</span></p></div>';
+    }).join('');
+  }
+
+  function applyEvents(events){
+    var pts = {};
+    ATHLETES.forEach(function(a){ pts[a.id]=0; });
+    events.forEach(function(e){ if (e && pts.hasOwnProperty(e.athleteId)) pts[e.athleteId] += (e.delta||0); });
+    state.points = pts;
+    state.events = events;
+    renderBoard();
+    renderFeed();
+  }
+
+  function setStatus(text){
+    var el = document.getElementById('db-status');
+    if (el) el.textContent = text;
+  }
+
+  function fetchPoints(){
+    return fetch('/api/points').then(function(r){
+      if (!r.ok) throw new Error('bad response');
+      return r.json();
+    }).then(function(data){
+      applyEvents(data.events || []);
+      setStatus('En vivo');
+    }).catch(function(){
+      setStatus('Sin conexión — reintentando…');
+    });
+  }
+
+  function logPoint(athleteId, delta){
+    if (busy) return;
+    busy = true;
+    fetch('/api/points', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ athleteId: athleteId, delta: delta })
+    }).then(function(r){
+      if (!r.ok) throw new Error('bad response');
+      return fetchPoints();
+    }).catch(function(){
+      alert('No se pudo registrar el punto. Revisa tu conexión e intenta de nuevo.');
+    }).finally(function(){ busy = false; });
+  }
+
+  renderAthleteGrid();
+  renderBoard();
+  renderFeed();
+  fetchPoints();
+  setInterval(fetchPoints, 4000);
+})();
+</script>
+</body>
+</html>
